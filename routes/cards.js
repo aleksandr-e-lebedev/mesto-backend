@@ -1,10 +1,6 @@
 const router = require('express').Router();
-const cards = require('../data/cards');
+const { readJsonFile, sendJson } = require('../middlewares');
 
-const getCards = (req, res) => {
-  res.send(cards);
-};
-
-router.get('/', getCards);
+router.get('/', readJsonFile, sendJson);
 
 module.exports = router;

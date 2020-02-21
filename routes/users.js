@@ -1,20 +1,21 @@
 /* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
-const users = require('../data/users');
+const { readJsonFile, sendJson } = require('../middlewares');
 
-const getUsers = (req, res) => {
-  res.send(users);
-};
-
-const getUser = (req, res) => {
+const doesUserExist = (req, res, next) => {
+  const { json: users } = res.locals;
   const { id } = req.params;
-
   const user = users.find((item) => item._id === id);
 
-  return user ? res.send(user) : res.status(404).send({ message: 'Нет пользователя с таким id' });
+  if (user) {
+    res.locals = { json: user };
+    next();
+  } else {
+    next({ status: 404, message: { message: 'Нет пользователя с таким id' } });
+  }
 };
 
-router.get('/', getUsers);
-router.get('/:id', getUser);
+router.get('/', readJsonFile, sendJson);
+router.get('/:id', readJsonFile, doesUserExist, sendJson);
 
 module.exports = router;
