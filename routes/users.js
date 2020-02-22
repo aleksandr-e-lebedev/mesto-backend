@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
 const { readJsonFile, sendJson } = require('../middlewares');
 
