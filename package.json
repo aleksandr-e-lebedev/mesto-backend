@@ -1,8 +1,8 @@
 {
   "name": "mesto-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Back-end application created with Node.js and Express",
+  "main": "app.js",
   "scripts": {
     "start": "node --require dotenv/config app.js",
     "dev": "nodemon app.js"
