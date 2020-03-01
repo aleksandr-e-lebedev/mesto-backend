@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { getUsers } = require('../controllers/users');
 const { readJsonFile, sendJson } = require('../middlewares');
 
 const doesUserExist = (req, res, next) => {
@@ -14,7 +15,7 @@ const doesUserExist = (req, res, next) => {
   }
 };
 
-router.get('/', readJsonFile, sendJson);
+router.get('/', getUsers);
 router.get('/:id', readJsonFile, doesUserExist, sendJson);
 
 module.exports = router;
