@@ -4,7 +4,7 @@ const path = require('path');
 
 const { PORT, DB } = require('./configuration/config');
 const routes = require('./routes');
-const { errorHandler } = require('./middlewares');
+const { authorization, errorHandler } = require('./middlewares');
 
 const app = express();
 
@@ -14,6 +14,7 @@ mongoose.connect(DB, {
   useFindAndModify: false,
 });
 
+app.use(authorization);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
