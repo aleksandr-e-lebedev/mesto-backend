@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { readJsonFile, sendJson } = require('../middlewares');
+const { getCards } = require('../controllers/cards');
 
-router.get('/', readJsonFile, sendJson);
+router.get('/', getCards);
 
 module.exports = router;
