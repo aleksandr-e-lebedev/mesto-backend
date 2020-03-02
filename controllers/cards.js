@@ -7,6 +7,17 @@ const getCards = (req, res, next) => {
     .catch(next);
 };
 
+const createCard = (req, res, next) => {
+  const { name, link } = req.body;
+  const { _id: owner } = req.user;
+
+  Card.create({ name, link, owner })
+    .then((card) => card.populate('owner').execPopulate())
+    .then((card) => res.status(201).send(card))
+    .catch(next);
+};
+
 module.exports = {
   getCards,
+  createCard,
 };
