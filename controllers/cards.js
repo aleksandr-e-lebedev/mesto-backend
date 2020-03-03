@@ -17,7 +17,26 @@ const createCard = (req, res, next) => {
     .catch(next);
 };
 
+const removeCard = (req, res, next) => {
+  const { cardId } = req.params;
+
+  Card.findById(cardId)
+    .then((card) => {
+      const user = req.user._id;
+      const owner = card.owner._id.toString();
+
+      if (user === owner) {
+        card.remove();
+        res.send({ message: 'Пост удалён' });
+      } else {
+        next({ status: 403, message: { message: 'Недостаточно прав' } });
+      }
+    })
+    .catch(next);
+};
+
 module.exports = {
   getCards,
   createCard,
+  removeCard,
 };
