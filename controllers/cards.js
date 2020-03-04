@@ -1,5 +1,6 @@
 const Card = require('../models/card');
 const ForbiddenError = require('../errors/ForbiddenError');
+const { POST_REMOVED, NOT_ENOUGH_RIGHTS } = require('../configuration/constants');
 
 const getCards = (req, res, next) => {
   Card.find()
@@ -28,9 +29,9 @@ const removeCard = (req, res, next) => {
 
       if (user === owner) {
         card.remove();
-        res.send({ message: 'Пост удалён' });
+        res.send({ message: POST_REMOVED });
       } else {
-        next(new ForbiddenError('Недостаточно прав'));
+        next(new ForbiddenError(NOT_ENOUGH_RIGHTS));
       }
     })
     .catch(next);
