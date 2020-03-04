@@ -1,4 +1,4 @@
-const SERVER_ERROR = 'Что-то пошло не так';
+const { SERVER_ERROR } = require('../configuration/constants');
 
 module.exports = (err, req, res, next) => {
   const {
