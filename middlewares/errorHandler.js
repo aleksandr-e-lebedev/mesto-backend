@@ -1,12 +1,10 @@
-const defaultErrorStatus = 500;
+const SERVER_ERROR = 'Что-то пошло не так';
 
-const errorHandler = (err, req, res, next) => {
+module.exports = (err, req, res, next) => {
   const {
-    status = defaultErrorStatus,
-    message = { message: 'Что-то пошло не так' },
+    status = 500,
+    message: errMessage = SERVER_ERROR,
   } = err;
 
-  res.status(status).send(message);
+  res.status(status).send({ message: errMessage });
 };
-
-module.exports = errorHandler;
