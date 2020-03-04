@@ -1,4 +1,5 @@
 const Card = require('../models/card');
+const ForbiddenError = require('../errors/ForbiddenError');
 
 const getCards = (req, res, next) => {
   Card.find()
@@ -29,7 +30,7 @@ const removeCard = (req, res, next) => {
         card.remove();
         res.send({ message: 'Пост удалён' });
       } else {
-        next({ status: 403, message: { message: 'Недостаточно прав' } });
+        next(new ForbiddenError('Недостаточно прав'));
       }
     })
     .catch(next);

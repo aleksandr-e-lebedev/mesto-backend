@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const NotFoundError = require('../errors/NotFoundError');
 
 const getUsers = (req, res, next) => {
   User.find()
@@ -11,7 +12,7 @@ const getUser = (req, res, next) => {
 
   User.findById(userId)
     .then((user) => res.send(user))
-    .catch(() => next({ status: 404, message: { message: 'Нет пользователя с таким id' } }));
+    .catch(() => next(new NotFoundError('Нет пользователя с таким id')));
 };
 
 const createUser = (req, res, next) => {
