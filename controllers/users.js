@@ -34,9 +34,20 @@ const updateUserData = (req, res, next) => {
     .catch(next);
 };
 
+const updateUserAvatar = (req, res, next) => {
+  const { _id: id } = req.user;
+  const { avatar } = req.body;
+  const opts = { new: true, runValidators: true };
+
+  User.findByIdAndUpdate(id, { avatar }, opts)
+    .then((user) => res.send(user))
+    .catch(next);
+};
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   updateUserData,
+  updateUserAvatar,
 };
