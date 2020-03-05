@@ -24,8 +24,19 @@ const createUser = (req, res, next) => {
     .catch(next);
 };
 
+const updateUserData = (req, res, next) => {
+  const { _id: id } = req.user;
+  const { name, about } = req.body;
+  const opts = { new: true, runValidators: true };
+
+  User.findByIdAndUpdate(id, { name, about }, opts)
+    .then((user) => res.send(user))
+    .catch(next);
+};
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
+  updateUserData,
 };
