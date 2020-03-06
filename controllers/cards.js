@@ -37,8 +37,26 @@ const removeCard = (req, res, next) => {
     .catch(next);
 };
 
+const toggleCardLike = (req, res, next) => {
+  const { cardId } = req.params;
+  const { _id: userId } = req.user;
+  const opts = { new: true, runValidators: true };
+
+  let doc = {};
+
+  doc = req.method === 'PUT'
+    ? { $addToSet: { likes: userId } }
+    : { $pull: { likes: userId } };
+
+  Card.findByIdAndUpdate(cardId, doc, opts)
+    .populate(['owner', 'likes'])
+    .then((card) => res.send(card))
+    .catch(next);
+};
+
 module.exports = {
   getCards,
   createCard,
   removeCard,
+  toggleCardLike,
 };
