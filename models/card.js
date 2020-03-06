@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { setUpdateOptions } = require('../middlewares');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -28,6 +29,8 @@ const cardSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+cardSchema.pre('findOneAndUpdate', setUpdateOptions);
 
 cardSchema.path('link').validate(validator.isURL);
 

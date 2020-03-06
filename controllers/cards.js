@@ -40,7 +40,6 @@ const removeCard = (req, res, next) => {
 const toggleCardLike = (req, res, next) => {
   const { cardId } = req.params;
   const { _id: userId } = req.user;
-  const opts = { new: true, runValidators: true };
 
   let doc = {};
 
@@ -48,7 +47,7 @@ const toggleCardLike = (req, res, next) => {
     ? { $addToSet: { likes: userId } }
     : { $pull: { likes: userId } };
 
-  Card.findByIdAndUpdate(cardId, doc, opts)
+  Card.findByIdAndUpdate(cardId, doc)
     .populate(['owner', 'likes'])
     .then((card) => res.send(card))
     .catch(next);

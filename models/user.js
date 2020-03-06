@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { setUpdateOptions } = require('../middlewares');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -19,6 +20,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+userSchema.pre('findOneAndUpdate', setUpdateOptions);
 
 userSchema.path('avatar').validate(validator.isURL);
 
