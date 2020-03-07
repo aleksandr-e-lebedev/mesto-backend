@@ -34,4 +34,6 @@ cardSchema.pre('findOneAndUpdate', setUpdateOptions);
 
 cardSchema.path('link').validate(validator.isURL);
 
+cardSchema.set('versionKey', false);
+
 module.exports = mongoose.model('card', cardSchema);

@@ -25,4 +25,6 @@ userSchema.pre('findOneAndUpdate', setUpdateOptions);
 
 userSchema.path('avatar').validate(validator.isURL);
 
+userSchema.set('versionKey', false);
+
 module.exports = mongoose.model('user', userSchema);
