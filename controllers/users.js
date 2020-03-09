@@ -12,8 +12,15 @@ const getUser = (req, res, next) => {
   const { userId } = req.params;
 
   User.findById(userId)
-    .then((user) => res.send(user))
-    .catch(() => next(new NotFoundError(USER_NOT_FOUND)));
+    .then((user) => {
+      if (!user) {
+        next(new NotFoundError(USER_NOT_FOUND));
+        return;
+      }
+
+      res.send(user);
+    })
+    .catch(next);
 };
 
 const createUser = (req, res, next) => {
@@ -29,7 +36,14 @@ const updateUserData = (req, res, next) => {
   const { name, about } = req.body;
 
   User.findByIdAndUpdate(id, { name, about })
-    .then((user) => res.send(user))
+    .then((user) => {
+      if (!user) {
+        next(new NotFoundError(USER_NOT_FOUND));
+        return;
+      }
+
+      res.send(user);
+    })
     .catch(next);
 };
 
@@ -38,7 +52,14 @@ const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
 
   User.findByIdAndUpdate(id, { avatar })
-    .then((user) => res.send(user))
+    .then((user) => {
+      if (!user) {
+        next(new NotFoundError(USER_NOT_FOUND));
+        return;
+      }
+
+      res.send(user);
+    })
     .catch(next);
 };
 

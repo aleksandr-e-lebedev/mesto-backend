@@ -1,6 +1,7 @@
 const Card = require('../models/card');
+const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
-const { POST_REMOVED, NOT_ENOUGH_RIGHTS } = require('../configuration/constants');
+const { CARD_NOT_FOUND, POST_REMOVED, NOT_ENOUGH_RIGHTS } = require('../configuration/constants');
 
 const getCards = (req, res, next) => {
   Card.find()
@@ -24,6 +25,11 @@ const removeCard = (req, res, next) => {
 
   Card.findById(cardId)
     .then((card) => {
+      if (!card) {
+        next(new NotFoundError(CARD_NOT_FOUND));
+        return;
+      }
+
       const user = req.user._id;
       const owner = card.owner._id.toString();
 
@@ -49,7 +55,14 @@ const toggleCardLike = (req, res, next) => {
 
   Card.findByIdAndUpdate(cardId, doc)
     .populate(['owner', 'likes'])
-    .then((card) => res.send(card))
+    .then((card) => {
+      if (!card) {
+        next(new NotFoundError(CARD_NOT_FOUND));
+        return;
+      }
+
+      res.send(card);
+    })
     .catch(next);
 };
 
