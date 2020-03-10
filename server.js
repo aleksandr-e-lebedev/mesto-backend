@@ -9,4 +9,10 @@ mongoose.connect(DB, {
   useFindAndModify: false,
 });
 
-app.listen(PORT);
+const server = app.listen(PORT);
+
+process.on('unhandledRejection', () => {
+  server.close(() => {
+    process.exit(1);
+  });
+});
