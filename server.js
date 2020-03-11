@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const app = require('./app');
 const { DB, PORT } = require('./configuration/config');
+const errorLogger = require('./utils/errorLogger');
 
 mongoose.connect(DB, {
   useNewUrlParser: true,
@@ -11,7 +12,8 @@ mongoose.connect(DB, {
 
 const server = app.listen(PORT);
 
-process.on('unhandledRejection', () => {
+process.on('unhandledRejection', (err) => {
+  errorLogger.error(err);
   server.close(() => {
     process.exit(1);
   });
