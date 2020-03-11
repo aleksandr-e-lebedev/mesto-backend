@@ -1,3 +1,4 @@
+const { isCelebrate } = require('celebrate');
 const { SERVER_ERROR, INVALID_REQUEST, INVALID_INPUT_DATA } = require('../configuration/constants');
 const BadRequest = require('../errors/BadRequestError');
 
@@ -18,6 +19,7 @@ const createErrorProd = (err) => {
   let error = { ...err };
   error.message = err.message;
 
+  if (isCelebrate(error)) error = error.joi;
   if (error.name === 'CastError') error = handleCastErrorDB(error);
   if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
 
