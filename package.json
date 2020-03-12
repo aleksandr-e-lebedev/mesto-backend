@@ -1,7 +1,7 @@
 {
   "name": "mesto-backend",
-  "version": "1.0.0",
-  "description": "Back-end application created with Node.js and Express",
+  "version": "2.0.0",
+  "description": "Back-end application created with Node.js, Express and MongoDB",
   "main": "server.js",
   "scripts": {
     "start": "node --require dotenv/config server.js",
