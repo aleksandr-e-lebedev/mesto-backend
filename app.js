@@ -1,15 +1,15 @@
 const express = require('express');
-const path = require('path');
-const routes = require('./routes');
-const { errorHandler } = require('./middlewares');
-const { PORT: PORT_DEV } = require('./config.dev.json');
 
-const { PORT = PORT_DEV } = process.env;
+const routes = require('./routes');
+const { authorization, errorHandler, logger } = require('./middlewares');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(authorization);
+app.use(express.json());
+app.use(logger.requestLogger);
 app.use(routes);
+app.use(logger.errorLogger);
 app.use(errorHandler);
 
-app.listen(PORT);
+module.exports = app;

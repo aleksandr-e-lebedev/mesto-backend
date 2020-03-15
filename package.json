@@ -1,11 +1,11 @@
 {
   "name": "mesto-backend",
-  "version": "1.0.0",
-  "description": "Back-end application created with Node.js and Express",
-  "main": "app.js",
+  "version": "2.0.0",
+  "description": "Back-end application created with Node.js, Express and MongoDB",
+  "main": "server.js",
   "scripts": {
-    "start": "node --require dotenv/config app.js",
-    "dev": "nodemon app.js"
+    "start": "node --require dotenv/config server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,14 +19,19 @@
   },
   "homepage": "https://github.com/aleksandr-e-lebedev/mesto-backend#readme",
   "devDependencies": {
+    "cross-env": "7.0.2",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.1",
     "nodemon": "2.0.2"
   },
   "dependencies": {
-    "body-parser": "1.19.0",
+    "celebrate": "12.0.1",
     "dotenv": "8.2.0",
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "express-winston": "4.0.3",
+    "mongoose": "5.9.2",
+    "validator": "12.2.0",
+    "winston": "3.2.1"
   }
 }

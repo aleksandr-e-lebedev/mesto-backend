@@ -1,9 +1,15 @@
-const readJsonFile = require('./readJsonFile');
-const sendJson = require('./sendJson');
+const authorization = require('./authorization');
 const errorHandler = require('./errorHandler');
+const setUpdateOptions = require('./setUpdateOptions');
+const userPreValidator = require('./userPreValidator');
+const cardPreValidator = require('./cardPreValidator');
+const logger = require('./logger');
 
 module.exports = {
-  readJsonFile,
-  sendJson,
+  authorization,
   errorHandler,
+  setUpdateOptions,
+  userPreValidator,
+  cardPreValidator,
+  logger,
 };
