@@ -15,6 +15,10 @@ const USER_ABOUT_MIN_LENGTH = 'Информация о себе должна с�
 const USER_ABOUT_MAX_LENGTH = 'Информация о себе должна содержать не более 30 символов';
 const USER_AVATAR_REQUIRED = 'Пожалуйста, предоставьте своё фото';
 const USER_AVATAR_IS_URL = 'Некорректный формат ссылки на фото для пользователя';
+const USER_EMAIL_REQUIRED = 'Пожалуйста, укажите Вашу электронную почту';
+const USER_EMAIL_IS_EMAIL = 'Пожалуйста, предоставьте действительный адрес электронной почты';
+const USER_PASSWORD_REQUIRED = 'Пожалуйста, введите пароль';
+const USER_PASSWORD_MIN_LENGTH = 'Пароль должен содержать не менее 8 символов';
 
 const CARD_NAME_REQUIRED = 'У карточки должно быть название';
 const CARD_NAME_MIN_LENGTH = 'Название карточки должно содержать не менее 2 символов';
@@ -41,6 +45,10 @@ module.exports = {
   USER_ABOUT_MAX_LENGTH,
   USER_AVATAR_REQUIRED,
   USER_AVATAR_IS_URL,
+  USER_EMAIL_REQUIRED,
+  USER_EMAIL_IS_EMAIL,
+  USER_PASSWORD_REQUIRED,
+  USER_PASSWORD_MIN_LENGTH,
 
   CARD_NAME_REQUIRED,
   CARD_NAME_MIN_LENGTH,
