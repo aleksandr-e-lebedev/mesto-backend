@@ -2,13 +2,13 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const { USER_NOT_FOUND } = require('../configuration/constants');
 
-const getUsers = (req, res, next) => {
+exports.getUsers = (req, res, next) => {
   User.find()
     .then((users) => res.send(users))
     .catch(next);
 };
 
-const getUser = (req, res, next) => {
+exports.getUser = (req, res, next) => {
   const { userId } = req.params;
 
   User.findById(userId)
@@ -23,7 +23,7 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
-const createUser = (req, res, next) => {
+exports.createUser = (req, res, next) => {
   const { name, about, avatar } = req.body;
 
   User.create({ name, about, avatar })
@@ -31,7 +31,7 @@ const createUser = (req, res, next) => {
     .catch(next);
 };
 
-const updateUserData = (req, res, next) => {
+exports.updateUserData = (req, res, next) => {
   const { _id: id } = req.user;
   const { name, about } = req.body;
 
@@ -47,7 +47,7 @@ const updateUserData = (req, res, next) => {
     .catch(next);
 };
 
-const updateUserAvatar = (req, res, next) => {
+exports.updateUserAvatar = (req, res, next) => {
   const { _id: id } = req.user;
   const { avatar } = req.body;
 
@@ -61,12 +61,4 @@ const updateUserAvatar = (req, res, next) => {
       res.send(user);
     })
     .catch(next);
-};
-
-module.exports = {
-  getUsers,
-  getUser,
-  createUser,
-  updateUserData,
-  updateUserAvatar,
 };
