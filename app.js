@@ -1,7 +1,8 @@
 const express = require('express');
 
 const routes = require('./routes');
-const { authorization, errorHandler, logger } = require('./middlewares');
+const { authorization, logger } = require('./middlewares');
+const errorHandler = require('./controllers/errorController');
 
 const app = express();
 
