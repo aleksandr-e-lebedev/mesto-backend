@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const { setUpdateOptions } = require('../middlewares');
+const { hashPassword, setUpdateOptions } = require('../middlewares');
 const consts = require('../configuration/constants');
 
 const userSchema = new mongoose.Schema({
@@ -36,6 +36,8 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 });
+
+userSchema.pre('save', hashPassword);
 
 userSchema.pre('findOneAndUpdate', setUpdateOptions);
 
