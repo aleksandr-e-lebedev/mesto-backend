@@ -24,9 +24,13 @@ exports.getUser = (req, res, next) => {
 };
 
 exports.createUser = (req, res, next) => {
-  const { name, about, avatar } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
 
-  User.create({ name, about, avatar })
+  User.create({
+    name, about, avatar, email, password,
+  })
     .then((user) => res.status(201).send(user))
     .catch(next);
 };
