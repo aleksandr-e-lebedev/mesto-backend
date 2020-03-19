@@ -3,14 +3,14 @@ const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const { CARD_NOT_FOUND, POST_REMOVED, NOT_ENOUGH_RIGHTS } = require('../configuration/constants');
 
-const getCards = (req, res, next) => {
+exports.getCards = (req, res, next) => {
   Card.find()
     .populate(['owner', 'likes'])
     .then((cards) => res.send(cards))
     .catch(next);
 };
 
-const createCard = (req, res, next) => {
+exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const { _id: owner } = req.user;
 
@@ -20,7 +20,7 @@ const createCard = (req, res, next) => {
     .catch(next);
 };
 
-const removeCard = (req, res, next) => {
+exports.removeCard = (req, res, next) => {
   const { cardId } = req.params;
 
   Card.findById(cardId)
@@ -43,7 +43,7 @@ const removeCard = (req, res, next) => {
     .catch(next);
 };
 
-const toggleCardLike = (req, res, next) => {
+exports.toggleCardLike = (req, res, next) => {
   const { cardId } = req.params;
   const { _id: userId } = req.user;
 
@@ -64,11 +64,4 @@ const toggleCardLike = (req, res, next) => {
       res.send(card);
     })
     .catch(next);
-};
-
-module.exports = {
-  getCards,
-  createCard,
-  removeCard,
-  toggleCardLike,
 };
