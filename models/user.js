@@ -22,6 +22,19 @@ const userSchema = new mongoose.Schema({
     required: [true, consts.USER_AVATAR_REQUIRED],
     validate: [validator.isURL, consts.USER_AVATAR_IS_URL],
   },
+  email: {
+    type: String,
+    required: [true, consts.USER_EMAIL_REQUIRED],
+    unique: true,
+    lowercase: true,
+    validate: [validator.isEmail, consts.USER_EMAIL_IS_EMAIL],
+  },
+  password: {
+    type: String,
+    required: [true, consts.USER_PASSWORD_REQUIRED],
+    minlength: [8, consts.USER_PASSWORD_MIN_LENGTH],
+    select: false,
+  },
 });
 
 userSchema.pre('findOneAndUpdate', setUpdateOptions);
