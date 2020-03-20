@@ -32,7 +32,7 @@ exports.createUser = (req, res, next) => {
   User.create({
     name, about, avatar, email, password,
   })
-    .then((user) => res.status(201).send(user))
+    .then((user) => createSendToken(res, 201, user))
     .catch(next);
 };
 
