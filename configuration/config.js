@@ -1,9 +1,32 @@
-const { PORT: PORT_DEV, DB: DB_DEV, TOKEN: TOKEN_DEV } = require('../config.dev.json');
+const {
+  PORT: PORT_DEV,
+  DB: DB_DEV,
 
-const { PORT = PORT_DEV, DB = DB_DEV, TOKEN = TOKEN_DEV } = process.env;
+  JWT_SECRET: JWT_SECRET_DEV,
+  JWT_EXPIRES_IN: JWT_EXPIRES_IN_DEV,
+  JWT_COOKIE_EXPIRES_IN: JWT_COOKIE_EXPIRES_IN_DEV,
+
+  TOKEN: TOKEN_DEV,
+} = require('../config.dev.json');
+
+const {
+  PORT = PORT_DEV,
+  DB = DB_DEV,
+
+  JWT_SECRET = JWT_SECRET_DEV,
+  JWT_EXPIRES_IN = JWT_EXPIRES_IN_DEV,
+  JWT_COOKIE_EXPIRES_IN = JWT_COOKIE_EXPIRES_IN_DEV,
+
+  TOKEN = TOKEN_DEV,
+} = process.env;
 
 module.exports = {
   PORT,
   DB,
+
+  JWT_SECRET,
+  JWT_EXPIRES_IN,
+  JWT_COOKIE_EXPIRES_IN,
+
   TOKEN,
 };
