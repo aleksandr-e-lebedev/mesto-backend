@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const { hashPassword, setUpdateOptions } = require('../middlewares');
+const isPasswordCorrect = require('../utils/isPasswordCorrect');
 const consts = require('../configuration/constants');
 
 const userSchema = new mongoose.Schema({
@@ -40,6 +41,8 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', hashPassword);
 
 userSchema.pre('findOneAndUpdate', setUpdateOptions);
+
+userSchema.method('isPasswordCorrect', isPasswordCorrect);
 
 userSchema.set('versionKey', false);
 
