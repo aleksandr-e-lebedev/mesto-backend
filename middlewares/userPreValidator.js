@@ -14,6 +14,12 @@ const createUserReqCheck = celebrate({
     avatar: Joi.string()
       .required()
       .error(new BadRequestError(consts.USER_AVATAR_REQUIRED)),
+    email: Joi.string()
+      .required()
+      .error(new BadRequestError(consts.USER_EMAIL_REQUIRED)),
+    password: Joi.string()
+      .required()
+      .error(new BadRequestError(consts.USER_PASSWORD_REQUIRED)),
   }),
 });
 
