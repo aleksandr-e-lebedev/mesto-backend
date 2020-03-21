@@ -7,6 +7,7 @@ const SERVER_ERROR = 'Что-то пошло не так';
 const INVALID_REQUEST = 'Запрос сформирован неправильно';
 const INVALID_INPUT_DATA = 'Предоставлены некорректные данные';
 const INVALID_EMAIL_OR_PASSWORD = 'Неправильные почта или пароль';
+const AUTH_REQUIRED = 'Вы не авторизованы. Пожалуйста, авторизуйтесь для получения доступа';
 
 const USER_NAME_REQUIRED = 'Пожалуйста, укажите своё имя';
 const USER_NAME_MIN_LENGTH = 'Имя должно содержать не менее 2 символов';
@@ -38,6 +39,7 @@ module.exports = {
   INVALID_REQUEST,
   INVALID_INPUT_DATA,
   INVALID_EMAIL_OR_PASSWORD,
+  AUTH_REQUIRED,
 
   USER_NAME_REQUIRED,
   USER_NAME_MIN_LENGTH,
