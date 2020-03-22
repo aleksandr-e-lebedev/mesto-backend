@@ -1,18 +1,26 @@
 const { isCelebrate } = require('celebrate');
-const { SERVER_ERROR, INVALID_REQUEST, INVALID_INPUT_DATA } = require('../configuration/constants');
-const BadRequest = require('../errors/BadRequestError');
+
+const BadRequestError = require('../errors/BadRequestError');
+const consts = require('../configuration/constants');
 
 const handleCastErrorDB = (err) => {
-  const message = `${INVALID_REQUEST}: ${err.path}: ${err.value}`;
+  const message = `${consts.INVALID_REQUEST}: ${err.path}: ${err.value}`;
 
-  return new BadRequest(message);
+  return new BadRequestError(message);
 };
 
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((error) => error.message);
-  const message = `${INVALID_INPUT_DATA}. ${errors.join('. ')}`;
+  const message = `${consts.INVALID_INPUT_DATA}. ${errors.join('. ')}`;
 
-  return new BadRequest(message);
+  return new BadRequestError(message);
+};
+
+const handleDuplicateFieldsDB = (err) => {
+  const value = err.errmsg.match(/"(.*)"/)[1];
+  const message = `${value} - ${consts.DUPLICATE_FIELD_VALUE}`;
+
+  return new BadRequestError(message);
 };
 
 const createErrorProd = (err) => {
@@ -22,6 +30,7 @@ const createErrorProd = (err) => {
   if (isCelebrate(error)) error = error.joi;
   if (error.name === 'CastError') error = handleCastErrorDB(error);
   if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+  if (error.code === 11000) error = handleDuplicateFieldsDB(error);
 
   return error;
 };
@@ -42,7 +51,7 @@ const sendErrorProd = (err, res) => {
     });
   } else {
     res.status(500).send({
-      message: SERVER_ERROR,
+      message: consts.SERVER_ERROR,
     });
   }
 };
