@@ -1,6 +1,7 @@
 const { isCelebrate } = require('celebrate');
 
 const BadRequestError = require('../errors/BadRequestError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 const consts = require('../configuration/constants');
 
 const handleCastErrorDB = (err) => {
@@ -23,6 +24,12 @@ const handleDuplicateFieldsDB = (err) => {
   return new BadRequestError(message);
 };
 
+const handleJWTError = () => {
+  const message = consts.INVALID_TOKEN;
+
+  return new UnauthorizedError(message);
+};
+
 const createErrorProd = (err) => {
   let error = { ...err };
   error.message = err.message;
@@ -31,6 +38,7 @@ const createErrorProd = (err) => {
   if (error.name === 'CastError') error = handleCastErrorDB(error);
   if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
   if (error.code === 11000) error = handleDuplicateFieldsDB(error);
+  if (error.name === 'JsonWebTokenError') error = handleJWTError();
 
   return error;
 };
