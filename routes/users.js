@@ -6,7 +6,7 @@ const {
 
 const {
   getUsers, getUser, updateUserData, updateUserAvatar,
-} = require('../controllers/users');
+} = require('../controllers/usersController');
 
 const {
   auth, userPreValidator,
