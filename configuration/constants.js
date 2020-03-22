@@ -9,6 +9,7 @@ const INVALID_INPUT_DATA = 'Предоставлены некорректные 
 const INVALID_EMAIL_OR_PASSWORD = 'Неправильные почта или пароль';
 const DUPLICATE_FIELD_VALUE = 'Поле с таким значением уже существует. Пожалуйста, используйте другое значение';
 const AUTH_REQUIRED = 'Вы не авторизованы. Пожалуйста, авторизуйтесь для получения доступа';
+const INVALID_TOKEN = 'Недействительный токен. Пожалуйста, авторизуйтесь заново';
 
 const USER_NAME_REQUIRED = 'Пожалуйста, укажите своё имя';
 const USER_NAME_MIN_LENGTH = 'Имя должно содержать не менее 2 символов';
@@ -42,6 +43,7 @@ module.exports = {
   INVALID_EMAIL_OR_PASSWORD,
   DUPLICATE_FIELD_VALUE,
   AUTH_REQUIRED,
+  INVALID_TOKEN,
 
   USER_NAME_REQUIRED,
   USER_NAME_MIN_LENGTH,
