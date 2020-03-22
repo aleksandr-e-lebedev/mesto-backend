@@ -10,6 +10,7 @@ const INVALID_EMAIL_OR_PASSWORD = 'Неправильные почта или п
 const DUPLICATE_FIELD_VALUE = 'Поле с таким значением уже существует. Пожалуйста, используйте другое значение';
 const AUTH_REQUIRED = 'Вы не авторизованы. Пожалуйста, авторизуйтесь для получения доступа';
 const INVALID_TOKEN = 'Недействительный токен. Пожалуйста, авторизуйтесь заново';
+const EXPIRED_TOKEN = 'Срок действия токена истёк. Пожалуйста, авторизуйтесь заново';
 
 const USER_NAME_REQUIRED = 'Пожалуйста, укажите своё имя';
 const USER_NAME_MIN_LENGTH = 'Имя должно содержать не менее 2 символов';
@@ -44,6 +45,7 @@ module.exports = {
   DUPLICATE_FIELD_VALUE,
   AUTH_REQUIRED,
   INVALID_TOKEN,
+  EXPIRED_TOKEN,
 
   USER_NAME_REQUIRED,
   USER_NAME_MIN_LENGTH,
