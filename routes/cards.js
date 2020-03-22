@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
   getCards, createCard, removeCard, toggleCardLike,
-} = require('../controllers/cards');
+} = require('../controllers/cardsController');
 
 const {
   auth, cardPreValidator,
