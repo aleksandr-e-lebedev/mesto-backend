@@ -5,8 +5,6 @@ const {
   JWT_SECRET: JWT_SECRET_DEV,
   JWT_EXPIRES_IN: JWT_EXPIRES_IN_DEV,
   JWT_COOKIE_EXPIRES_IN: JWT_COOKIE_EXPIRES_IN_DEV,
-
-  TOKEN: TOKEN_DEV,
 } = require('../config.dev.json');
 
 const {
@@ -16,8 +14,6 @@ const {
   JWT_SECRET = JWT_SECRET_DEV,
   JWT_EXPIRES_IN = JWT_EXPIRES_IN_DEV,
   JWT_COOKIE_EXPIRES_IN = JWT_COOKIE_EXPIRES_IN_DEV,
-
-  TOKEN = TOKEN_DEV,
 } = process.env;
 
 module.exports = {
@@ -27,6 +23,4 @@ module.exports = {
   JWT_SECRET,
   JWT_EXPIRES_IN,
   JWT_COOKIE_EXPIRES_IN,
-
-  TOKEN,
 };
