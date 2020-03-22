@@ -30,6 +30,12 @@ const handleJWTError = () => {
   return new UnauthorizedError(message);
 };
 
+const handleJWTExpiredError = () => {
+  const message = consts.EXPIRED_TOKEN;
+
+  return new UnauthorizedError(message);
+};
+
 const createErrorProd = (err) => {
   let error = { ...err };
   error.message = err.message;
@@ -39,6 +45,7 @@ const createErrorProd = (err) => {
   if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
   if (error.code === 11000) error = handleDuplicateFieldsDB(error);
   if (error.name === 'JsonWebTokenError') error = handleJWTError();
+  if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
   return error;
 };
