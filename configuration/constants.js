@@ -7,6 +7,7 @@ const SERVER_ERROR = 'Что-то пошло не так';
 const INVALID_REQUEST = 'Запрос сформирован неправильно';
 const INVALID_INPUT_DATA = 'Предоставлены некорректные данные';
 const INVALID_EMAIL_OR_PASSWORD = 'Неправильные почта или пароль';
+const DUPLICATE_FIELD_VALUE = 'Поле с таким значением уже существует. Пожалуйста, используйте другое значение';
 const AUTH_REQUIRED = 'Вы не авторизованы. Пожалуйста, авторизуйтесь для получения доступа';
 
 const USER_NAME_REQUIRED = 'Пожалуйста, укажите своё имя';
@@ -39,6 +40,7 @@ module.exports = {
   INVALID_REQUEST,
   INVALID_INPUT_DATA,
   INVALID_EMAIL_OR_PASSWORD,
+  DUPLICATE_FIELD_VALUE,
   AUTH_REQUIRED,
 
   USER_NAME_REQUIRED,
