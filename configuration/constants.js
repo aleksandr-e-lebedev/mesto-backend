@@ -11,6 +11,7 @@ const DUPLICATE_FIELD_VALUE = 'Поле с таким значением уже 
 const AUTH_REQUIRED = 'Вы не авторизованы. Пожалуйста, авторизуйтесь для получения доступа';
 const INVALID_TOKEN = 'Недействительный токен. Пожалуйста, авторизуйтесь заново';
 const EXPIRED_TOKEN = 'Срок действия токена истёк. Пожалуйста, авторизуйтесь заново';
+const TOO_MANY_REQUESTS = 'Слишком много запросов с этого IP. Пожалуйста, попробуйте снова через 15 минут';
 
 const USER_NAME_REQUIRED = 'Пожалуйста, укажите своё имя';
 const USER_NAME_MIN_LENGTH = 'Имя должно содержать не менее 2 символов';
@@ -46,6 +47,7 @@ module.exports = {
   AUTH_REQUIRED,
   INVALID_TOKEN,
   EXPIRED_TOKEN,
+  TOO_MANY_REQUESTS,
 
   USER_NAME_REQUIRED,
   USER_NAME_MIN_LENGTH,
