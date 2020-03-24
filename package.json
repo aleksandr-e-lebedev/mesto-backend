@@ -1,6 +1,6 @@
 {
   "name": "mesto-backend",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Back-end application created with Node.js, Express and MongoDB",
   "main": "server.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/aleksandr-e-lebedev/mesto-backend.git"
   },
-  "keywords": [],
+  "keywords": ["Node.js", "Express", "MongoDB"],
   "author": "Aleksandr Lebedev",
   "license": "ISC",
   "bugs": {
