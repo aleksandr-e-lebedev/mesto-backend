@@ -1,9 +1,8 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const rateLimiter = require('./utils/rateLimiter');
 const routes = require('./routes');
-const { logger } = require('./middlewares');
+const { rateLimiter, logger } = require('./middlewares');
 const errorHandler = require('./controllers/errorController');
 
 const app = express();
