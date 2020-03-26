@@ -1,6 +1,7 @@
 const { isCelebrate } = require('celebrate');
 
 const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const consts = require('../configuration/constants');
 
@@ -21,7 +22,7 @@ const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/"(.*)"/)[1];
   const message = `${value} - ${consts.DUPLICATE_FIELD_VALUE}`;
 
-  return new BadRequestError(message);
+  return new ConflictError(message);
 };
 
 const handleJWTError = () => {
@@ -36,7 +37,7 @@ const handleJWTExpiredError = () => {
   return new UnauthorizedError(message);
 };
 
-const createErrorProd = (err) => {
+const createError = (err) => {
   let error = { ...err };
   error.message = err.message;
 
@@ -75,8 +76,8 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
 
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, res);
+    sendErrorDev(createError(err), res);
   } else {
-    sendErrorProd(createErrorProd(err), res);
+    sendErrorProd(createError(err), res);
   }
 };
