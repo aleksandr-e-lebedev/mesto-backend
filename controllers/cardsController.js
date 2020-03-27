@@ -24,12 +24,8 @@ exports.removeCard = (req, res, next) => {
   const { cardId } = req.params;
 
   Card.findById(cardId)
+    .orFail(new NotFoundError(CARD_NOT_FOUND))
     .then((card) => {
-      if (!card) {
-        next(new NotFoundError(CARD_NOT_FOUND));
-        return;
-      }
-
       const user = req.user._id;
       const owner = card.owner._id.toString();
 
@@ -54,14 +50,8 @@ exports.toggleCardLike = (req, res, next) => {
     : { $pull: { likes: userId } };
 
   Card.findByIdAndUpdate(cardId, doc)
+    .orFail(new NotFoundError(CARD_NOT_FOUND))
     .populate(['owner', 'likes'])
-    .then((card) => {
-      if (!card) {
-        next(new NotFoundError(CARD_NOT_FOUND));
-        return;
-      }
-
-      res.send(card);
-    })
+    .then((card) => res.send(card))
     .catch(next);
 };
