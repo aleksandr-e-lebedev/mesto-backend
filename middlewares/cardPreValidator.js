@@ -1,4 +1,5 @@
 const { celebrate, Joi, Segments } = require('celebrate');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const consts = require('../configuration/constants');
 
@@ -30,4 +31,11 @@ exports.createCardReqCheck = celebrate({
       .uri()
       .messages(messages.link),
   }).prefs({ stripUnknown: true }),
+});
+
+exports.cardIdReqCheck = celebrate({
+  [Segments.PARAMS]: Joi.object({
+    cardId: Joi.objectId()
+      .message(consts.INVALID_REQUEST),
+  }),
 });
