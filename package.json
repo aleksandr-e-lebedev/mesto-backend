@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/aleksandr-e-lebedev/mesto-backend.git"
   },
-  "keywords": ["Node.js", "Express", "MongoDB"],
+  "keywords": [
+    "Node.js",
+    "Express",
+    "MongoDB"
+  ],
   "author": "Aleksandr Lebedev",
   "license": "ISC",
   "bugs": {
@@ -34,6 +38,7 @@
     "express-rate-limit": "5.1.1",
     "express-winston": "4.0.3",
     "helmet": "3.21.3",
+    "joi-objectid": "3.0.1",
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.9.2",
     "validator": "12.2.0",
