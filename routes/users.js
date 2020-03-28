@@ -5,17 +5,21 @@ const {
 } = require('../controllers/usersController');
 
 const {
-  auth, userPreValidator,
+  authPreValidator, auth, userPreValidator,
 } = require('../middlewares');
+
+const {
+  jwtCookieReqCheck,
+} = authPreValidator;
 
 const {
   userIdReqCheck, updateUserDataReqCheck, updateUserAvatarReqCheck,
 } = userPreValidator;
 
-router.get('/', auth, getUsers);
-router.get('/:userId', auth, userIdReqCheck, getUser);
+router.get('/', jwtCookieReqCheck, auth, getUsers);
+router.get('/:userId', jwtCookieReqCheck, auth, userIdReqCheck, getUser);
 
-router.patch('/me', auth, updateUserDataReqCheck, updateUserData);
-router.patch('/me/avatar', auth, updateUserAvatarReqCheck, updateUserAvatar);
+router.patch('/me', jwtCookieReqCheck, auth, updateUserDataReqCheck, updateUserData);
+router.patch('/me/avatar', jwtCookieReqCheck, auth, updateUserAvatarReqCheck, updateUserAvatar);
 
 module.exports = router;
