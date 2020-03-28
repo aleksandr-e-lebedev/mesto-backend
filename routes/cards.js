@@ -9,7 +9,7 @@ const {
 } = require('../middlewares');
 
 const {
-  createCardReqCheck,
+  createCardReqCheck, cardIdReqCheck,
 } = cardPreValidator;
 
 router
@@ -19,11 +19,11 @@ router
 
 router
   .route('/:cardId')
-  .delete(auth, removeCard);
+  .delete(auth, cardIdReqCheck, removeCard);
 
 router
   .route('/:cardId/likes')
-  .put(auth, toggleCardLike)
-  .delete(auth, toggleCardLike);
+  .put(auth, cardIdReqCheck, toggleCardLike)
+  .delete(auth, cardIdReqCheck, toggleCardLike);
 
 module.exports = router;
