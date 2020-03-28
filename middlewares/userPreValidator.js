@@ -1,4 +1,5 @@
 const { celebrate, Joi, Segments } = require('celebrate');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const consts = require('../configuration/constants');
 
@@ -99,4 +100,11 @@ exports.updateUserAvatarReqCheck = celebrate({
       .uri()
       .messages(messages.avatar),
   }).prefs({ stripUnknown: true }),
+});
+
+exports.userIdReqCheck = celebrate({
+  [Segments.PARAMS]: Joi.object({
+    userId: Joi.objectId()
+      .message(consts.INVALID_REQUEST),
+  }),
 });
