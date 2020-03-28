@@ -1,5 +1,11 @@
 {
   "PORT": 3000,
   "DB": "mongodb://localhost:27017/mestodb",
-  "TOKEN": "5e5be397741955078c9517ef"
+
+  "JWT_SECRET": "super-secure-and-extra-long-secret-key",
+  "JWT_EXPIRES_IN": "7d",
+  "JWT_COOKIE_EXPIRES_IN": "7",
+
+  "RATE_LIMIT_WINDOW": "15",
+  "RATE_LIMIT_MAX": "100"
 }
