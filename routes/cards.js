@@ -5,8 +5,12 @@ const {
 } = require('../controllers/cardsController');
 
 const {
-  auth, cardPreValidator,
+  authPreValidator, auth, cardPreValidator,
 } = require('../middlewares');
+
+const {
+  jwtCookieReqCheck,
+} = authPreValidator;
 
 const {
   createCardReqCheck, cardIdReqCheck,
@@ -14,16 +18,16 @@ const {
 
 router
   .route('/')
-  .get(auth, getCards)
-  .post(auth, createCardReqCheck, createCard);
+  .get(jwtCookieReqCheck, auth, getCards)
+  .post(jwtCookieReqCheck, auth, createCardReqCheck, createCard);
 
 router
   .route('/:cardId')
-  .delete(auth, cardIdReqCheck, removeCard);
+  .delete(jwtCookieReqCheck, auth, cardIdReqCheck, removeCard);
 
 router
   .route('/:cardId/likes')
-  .put(auth, cardIdReqCheck, toggleCardLike)
-  .delete(auth, cardIdReqCheck, toggleCardLike);
+  .put(jwtCookieReqCheck, auth, cardIdReqCheck, toggleCardLike)
+  .delete(jwtCookieReqCheck, auth, cardIdReqCheck, toggleCardLike);
 
 module.exports = router;
