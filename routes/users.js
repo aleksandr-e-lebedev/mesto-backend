@@ -9,11 +9,11 @@ const {
 } = require('../middlewares');
 
 const {
-  updateUserDataReqCheck, updateUserAvatarReqCheck,
+  userIdReqCheck, updateUserDataReqCheck, updateUserAvatarReqCheck,
 } = userPreValidator;
 
 router.get('/', auth, getUsers);
-router.get('/:userId', auth, getUser);
+router.get('/:userId', auth, userIdReqCheck, getUser);
 
 router.patch('/me', auth, updateUserDataReqCheck, updateUserData);
 router.patch('/me/avatar', auth, updateUserAvatarReqCheck, updateUserAvatar);
