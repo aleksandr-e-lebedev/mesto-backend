@@ -4,7 +4,7 @@
   "description": "Back-end application created with Node.js, Express and MongoDB",
   "main": "server.js",
   "scripts": {
-    "start": "node --require dotenv/config server.js",
+    "start": "node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
   "repository": {
