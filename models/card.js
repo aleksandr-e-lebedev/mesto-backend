@@ -7,18 +7,18 @@ const consts = require('../configuration/constants');
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, consts.CARD_NAME_REQUIRED],
-    minlength: [2, consts.CARD_NAME_MIN_LENGTH],
-    maxlength: [30, consts.CARD_NAME_MAX_LENGTH],
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
   link: {
     type: String,
-    required: [true, consts.CARD_LINK_REQUIRED],
+    required: true,
     validate: [validator.isURL, consts.CARD_LINK_IS_URL],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, consts.CARD_OWNER_REQUIRED],
+    required: true,
     ref: 'user',
   },
   likes: [

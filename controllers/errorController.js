@@ -5,10 +5,14 @@ const ConflictError = require('../errors/ConflictError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const consts = require('../configuration/constants');
 
-const handleCastErrorDB = (err) => {
-  const message = `${consts.INVALID_REQUEST}: ${err.path}: ${err.value}`;
+const handleCelebrateError = (err) => {
+  let error = {};
 
-  return new BadRequestError(message);
+  error = err.message.includes('jwt')
+    ? new UnauthorizedError(consts.AUTH_REQUIRED)
+    : new BadRequestError(err.message);
+
+  return error;
 };
 
 const handleValidationErrorDB = (err) => {
@@ -41,8 +45,7 @@ const createError = (err) => {
   let error = { ...err };
   error.message = err.message;
 
-  if (isCelebrate(error)) error = error.joi;
-  if (error.name === 'CastError') error = handleCastErrorDB(error);
+  if (isCelebrate(error)) error = handleCelebrateError(error);
   if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
   if (error.code === 11000) error = handleDuplicateFieldsDB(error);
   if (error.name === 'JsonWebTokenError') error = handleJWTError();

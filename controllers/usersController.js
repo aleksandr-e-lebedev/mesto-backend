@@ -12,14 +12,8 @@ exports.getUser = (req, res, next) => {
   const { userId } = req.params;
 
   User.findById(userId)
-    .then((user) => {
-      if (!user) {
-        next(new NotFoundError(USER_NOT_FOUND));
-        return;
-      }
-
-      res.send(user);
-    })
+    .orFail(new NotFoundError(USER_NOT_FOUND))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -28,14 +22,8 @@ exports.updateUserData = (req, res, next) => {
   const { name, about } = req.body;
 
   User.findByIdAndUpdate(id, { name, about })
-    .then((user) => {
-      if (!user) {
-        next(new NotFoundError(USER_NOT_FOUND));
-        return;
-      }
-
-      res.send(user);
-    })
+    .orFail(new NotFoundError(USER_NOT_FOUND))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -44,13 +32,7 @@ exports.updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
 
   User.findByIdAndUpdate(id, { avatar })
-    .then((user) => {
-      if (!user) {
-        next(new NotFoundError(USER_NOT_FOUND));
-        return;
-      }
-
-      res.send(user);
-    })
+    .orFail(new NotFoundError(USER_NOT_FOUND))
+    .then((user) => res.send(user))
     .catch(next);
 };

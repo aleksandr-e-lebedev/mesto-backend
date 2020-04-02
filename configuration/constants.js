@@ -31,7 +31,6 @@ const CARD_NAME_MIN_LENGTH = 'Название карточки должно с�
 const CARD_NAME_MAX_LENGTH = 'Название карточки должно содержать не более 30 символов';
 const CARD_LINK_REQUIRED = 'У карточки должна быть ссылка на картинку';
 const CARD_LINK_IS_URL = 'Некорректный формат ссылки на фото для карточки';
-const CARD_OWNER_REQUIRED = 'У карточки должен быть владелец';
 
 module.exports = {
   NOT_FOUND,
@@ -67,5 +66,4 @@ module.exports = {
   CARD_NAME_MAX_LENGTH,
   CARD_LINK_REQUIRED,
   CARD_LINK_IS_URL,
-  CARD_OWNER_REQUIRED,
 };

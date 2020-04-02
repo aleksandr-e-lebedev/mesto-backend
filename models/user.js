@@ -8,32 +8,32 @@ const consts = require('../configuration/constants');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, consts.USER_NAME_REQUIRED],
-    minlength: [2, consts.USER_NAME_MIN_LENGTH],
-    maxlength: [30, consts.USER_NAME_MAX_LENGTH],
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
   about: {
     type: String,
-    required: [true, consts.USER_ABOUT_REQUIRED],
-    minlength: [2, consts.USER_ABOUT_MIN_LENGTH],
-    maxlength: [30, consts.USER_ABOUT_MAX_LENGTH],
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
   avatar: {
     type: String,
-    required: [true, consts.USER_AVATAR_REQUIRED],
+    required: true,
     validate: [validator.isURL, consts.USER_AVATAR_IS_URL],
   },
   email: {
     type: String,
-    required: [true, consts.USER_EMAIL_REQUIRED],
+    required: true,
     unique: true,
     lowercase: true,
     validate: [validator.isEmail, consts.USER_EMAIL_IS_EMAIL],
   },
   password: {
     type: String,
-    required: [true, consts.USER_PASSWORD_REQUIRED],
-    minlength: [8, consts.USER_PASSWORD_MIN_LENGTH],
+    required: true,
+    minlength: 8,
     select: false,
   },
 });

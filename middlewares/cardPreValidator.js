@@ -1,19 +1,41 @@
 const { celebrate, Joi, Segments } = require('celebrate');
+Joi.objectId = require('joi-objectid')(Joi);
 
-const BadRequestError = require('../errors/BadRequestError');
 const consts = require('../configuration/constants');
 
-const createCardReqCheck = celebrate({
-  [Segments.BODY]: Joi.object().keys({
+const messages = {
+  name: {
+    'string.base': consts.INVALID_REQUEST,
+    'any.required': consts.CARD_NAME_REQUIRED,
+    'string.empty': consts.CARD_NAME_REQUIRED,
+    'string.min': consts.CARD_NAME_MIN_LENGTH,
+    'string.max': consts.CARD_NAME_MAX_LENGTH,
+  },
+  link: {
+    'string.base': consts.INVALID_REQUEST,
+    'any.required': consts.CARD_LINK_REQUIRED,
+    'string.empty': consts.CARD_LINK_REQUIRED,
+    'string.uri': consts.CARD_LINK_IS_URL,
+  },
+};
+
+exports.createCardReqCheck = celebrate({
+  [Segments.BODY]: Joi.object({
     name: Joi.string()
       .required()
-      .error(new BadRequestError(consts.CARD_NAME_REQUIRED)),
+      .min(2)
+      .max(30)
+      .messages(messages.name),
     link: Joi.string()
       .required()
-      .error(new BadRequestError(consts.CARD_LINK_REQUIRED)),
-  }),
+      .uri()
+      .messages(messages.link),
+  }).prefs({ stripUnknown: true }),
 });
 
-module.exports = {
-  createCardReqCheck,
-};
+exports.cardIdReqCheck = celebrate({
+  [Segments.PARAMS]: Joi.object({
+    cardId: Joi.objectId()
+      .message(consts.INVALID_REQUEST),
+  }),
+});
